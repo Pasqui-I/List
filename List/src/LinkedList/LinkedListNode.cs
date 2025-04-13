@@ -22,7 +22,7 @@ namespace List.src.LinkedList
 
         public override string ToString()
         {
-            throw new NotImplementedException();
+            return $"Value : {Value}";
         }
     }
 }

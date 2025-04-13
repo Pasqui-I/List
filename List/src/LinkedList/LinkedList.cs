@@ -76,7 +76,7 @@ namespace List.src.LinkedList
             {
                 throw new NullReferenceException("Head is null");
             }
-            if (head.Value != null && EqualityComparer<T>.Default.Equals(head.Value, ValueToRemove))
+            if (head.Value != null && head.Value.Equals(ValueToRemove))
             {
                 RemoveHead();
                 return;
@@ -108,7 +108,7 @@ namespace List.src.LinkedList
             while (Curr != null)
             {
                 T CurrValue = Curr.Value;
-                if (CurrValue != null && EqualityComparer<T>.Default.Equals(CurrValue, ValueToRemove))
+                if (CurrValue != null && CurrValue.Equals(ValueToRemove))
                 {
                     Prev.Next = Curr.Next;
                     length--;

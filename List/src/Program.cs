@@ -19,7 +19,7 @@ namespace List.src
             list.Remove(30);
             list.Remove(40);
             Console.WriteLine(list);
-            Console.WriteLine(list.IsPresent(10));
+            Console.WriteLine(list.IsPresent(110));
         }
     }
 }
