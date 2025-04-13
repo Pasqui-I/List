@@ -1,6 +1,10 @@
-namespace List.src.List{
-    public interface IList<T>{
-        public INode<T> Head {get; set;}
+namespace List.src.List
+{
+    public interface IList<T>
+    {
+        public INode<T>? Head { get; set; }
+
+        public int Length { get; set; }
 
         public void Add(T NewValue);
         public void Remove(T ValueToRemove);

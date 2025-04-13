@@ -5,6 +5,7 @@ namespace List.src.LinkedList
     public class LinkedListNode<T>(T Value) : INode<T>
     {
         private T value = Value;
+
         private LinkedListNode<T>? next = null;
 
         public T Value { get => value; set => this.value = value; }
