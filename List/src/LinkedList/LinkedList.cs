@@ -16,6 +16,7 @@ namespace List.src.LinkedList
             if (head == null)
             {
                 AddToHead(NewValue);
+                return;
             }
             AddToEnd(NewValue);
         }
@@ -24,6 +25,7 @@ namespace List.src.LinkedList
         {
             LinkedListNode<T> NewHead = new(NewValue);
             head = NewHead;
+            length++;
         }
 
         private void AddToEnd(T NewValue)
@@ -39,11 +41,12 @@ namespace List.src.LinkedList
                 Curr = Curr.Next;
             }
             Curr.Next = NewNode;
+            length++;
         }
 
         public bool IsEmpty()
         {
-            return head == null;
+            return length == 0 || head == null;
         }
 
         public bool IsPresent(T ValueToFind)
@@ -73,9 +76,10 @@ namespace List.src.LinkedList
             {
                 throw new NullReferenceException("Head is null");
             }
-            if (head.Value != null && head.Value.Equals(ValueToRemove))
+            if (head.Value != null && EqualityComparer<T>.Default.Equals(head.Value, ValueToRemove))
             {
                 RemoveHead();
+                return;
             }
             RemoveFromMiddle(ValueToRemove);
         }
@@ -89,6 +93,7 @@ namespace List.src.LinkedList
             }
 
             head = LinkedList<T>.ConvertToLinkedListNode(head).Next;
+            length--;
         }
 
         private void RemoveFromMiddle(T ValueToRemove)
@@ -103,13 +108,16 @@ namespace List.src.LinkedList
             while (Curr != null)
             {
                 T CurrValue = Curr.Value;
-                if (CurrValue != null && CurrValue.Equals(ValueToRemove))
+                if (CurrValue != null && EqualityComparer<T>.Default.Equals(CurrValue, ValueToRemove))
                 {
                     Prev.Next = Curr.Next;
+                    length--;
+                    return;
                 }
                 Prev = Curr;
                 Curr = Curr.Next;
             }
+
         }
 
         private static LinkedListNode<T> ConvertToLinkedListNode(INode<T> NodeToConvert)
@@ -117,29 +125,39 @@ namespace List.src.LinkedList
             ArgumentNullException.ThrowIfNull(NodeToConvert);
             return (LinkedListNode<T>)NodeToConvert;
         }
-
         public override string ToString()
         {
             if (head == null)
             {
                 return "[]";
             }
-            StringBuilder StringBuilder = new();
-            StringBuilder.Append('[');
-            LinkedListNode<T> Curr = LinkedList<T>.ConvertToLinkedListNode(head);
-            while (Curr.Next != null)
+
+            StringBuilder stringBuilder = new();
+            stringBuilder.Append('[');
+
+            LinkedListNode<T>? current = ConvertToLinkedListNode(head);
+
+            // Aggiungi il primo elemento
+            if (current.Value != null)
             {
-                T CurrValue = Curr.Value;
-                if (CurrValue != null)
+                stringBuilder.Append(current.Value);
+            }
+
+            current = current.Next;
+
+            // Aggiungi gli elementi successivi con la virgola
+            while (current != null)
+            {
+                if (current.Value != null)
                 {
-                    StringBuilder.Append(CurrValue + ", ");
+                    stringBuilder.Append(", ");
+                    stringBuilder.Append(current.Value);
                 }
+                current = current.Next;
             }
-            if (Curr != null && Curr.Value != null)
-            {
-                StringBuilder.Append(']');
-            }
-            return StringBuilder.ToString();
+
+            stringBuilder.Append(']');
+            return stringBuilder.ToString();
         }
     }
 }
