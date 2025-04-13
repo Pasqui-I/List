@@ -1,3 +1,4 @@
+using System.Data.Common;
 using System.Runtime.CompilerServices;
 using System.Text;
 using List.src.List;
@@ -120,6 +121,31 @@ namespace List.src.LinkedList
 
         }
 
+        public T? GetAt(int Index)
+        {
+            if (head == null)
+            {
+                throw new NullReferenceException("Head is null");
+            }
+
+            if (Index >= length || Index < 0)  // Dovresti usare >= invece di >
+            {
+                throw new IndexOutOfRangeException("Index out of bound");
+            }
+
+            LinkedListNode<T>? Curr = LinkedList<T>.ConvertToLinkedListNode(head);
+            for (int i = 0; i < Index; i++)
+            {
+                // Controlla se Curr è null prima di accedere a Next
+                if (Curr.Next == null)
+                {
+                    throw new IndexOutOfRangeException("Index out of range due to null node");
+                }
+                Curr = Curr.Next; // Corretto se Next è nullable
+            }
+
+            return Curr.Value;  // Usa il "null conditional operator" per restituire null se Curr è null
+        }
         private static LinkedListNode<T> ConvertToLinkedListNode(INode<T> NodeToConvert)
         {
             ArgumentNullException.ThrowIfNull(NodeToConvert);
@@ -159,5 +185,7 @@ namespace List.src.LinkedList
             stringBuilder.Append(']');
             return stringBuilder.ToString();
         }
+
+
     }
 }

@@ -9,7 +9,9 @@ namespace List.src.List
         public void Add(T NewValue);
         public void Remove(T ValueToRemove);
         public bool IsPresent(T ValueToFind);
+        public T? GetAt(int Index);
         public bool IsEmpty();
         public string ToString();
+
     }
 }
