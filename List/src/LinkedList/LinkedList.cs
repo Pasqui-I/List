@@ -210,25 +210,25 @@ namespace List.src.LinkedList
             StringBuilder stringBuilder = new(); // Crea un oggetto StringBuilder per costruire la stringa
             stringBuilder.Append('['); // Aggiungi il carattere di apertura
 
-            LinkedListNode<T>? current = ConvertToLinkedListNode(head); // Inizia dalla testa della lista
+            LinkedListNode<T>? Curr= ConvertToLinkedListNode(head); // Inizia dalla testa della lista
 
             // Aggiungi il primo elemento
-            if (current.Value != null)
+            if (Curr.Value != null)
             {
-                stringBuilder.Append(current.Value);
+                stringBuilder.Append(Curr.Value);
             }
 
-            current = current.Next; // Passa al nodo successivo
+            Curr = Curt.Next; // Passa al nodo successivo
 
             // Aggiungi gli altri elementi separati da virgole
-            while (current != null)
+            while (Curr != null)
             {
-                if (current.Value != null)
+                if (Curr.Value != null)
                 {
                     stringBuilder.Append(", ");
-                    stringBuilder.Append(current.Value);
+                    stringBuilder.Append(Curr.Value);
                 }
-                current = current.Next; // Passa al nodo successivo
+                Curr = Curr.Next; // Passa al nodo successivo
             }
 
             stringBuilder.Append(']'); // Aggiungi il carattere di chiusura
